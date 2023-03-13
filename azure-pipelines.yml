@@ -7,20 +7,23 @@ trigger: none
 
 pool:
   vmImage: ubuntu-latest
-parameters:
-  - name: environment
-    displayName: Which Environment to deploy?
-    type: string
-    default: 'develop'
-    values:
-    - develop
-    - preproduction
-    - production
- 
+
+# schedules:
+# - cron: "0 1 10-15 * sat"
+#   displayName: 7PM CST - SAT
+#   branches:
+#     include:
+#     - feature
+# - cron: "0 3 25-31 * sat"
+#   displayName: 9PM CST - SAT
+#   branches:
+#     include:
+#     - feature
+
 stages:
-- ${{ if eq( parameters['environment'], 'develop') }}:
-  - stage: stage1
-    jobs:
+
+- stage: stage1
+  jobs:
     - job: stage1job
       steps:
         - task: Bash@3
@@ -28,28 +31,51 @@ stages:
           inputs:
             targetType: inline
             script: |
-              echo "The stage selected was stage1 as environment: ${{parameters.environment}} was selected"
+              echo "The stage selected was stage1 as environment
+              GET https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/{buildId}?api-version=6.1-preview.7
+# parameters:
+#   - name: environment
+#     displayName: Which Environment to deploy?
+#     type: string
+#     default: 'develop'
+#     values:
+#     - develop
+#     - preproduction
+#     - production
+ 
+# stages:
+# - ${{ if eq( parameters['environment'], 'develop') }}:
+#   - stage: stage1
+#     jobs:
+#     - job: stage1job
+#       steps:
+#         - task: Bash@3
+#           displayName: stageselected
+#           inputs:
+#             targetType: inline
+#             script: |
+#               echo "The stage selected was stage1 as environment: ${{parameters.environment}} was selected"
 
-- ${{ elseif eq( parameters['environment'], 'develop') }}:
-  - stage: stage2
-    jobs:
-    - job: stage2job
-      steps:
-        - task: Bash@3
-          displayName: stageselected
-          inputs:
-            targetType: inline
-            script: |
-              echo "The stage selected was stage2 as environment: ${{parameters.environment}} was selected"
+# - ${{ elseif eq( parameters['environment'], 'develop') }}:
+#   - stage: stage2
+#     jobs:
+#     - job: stage2job
+#       steps:
+#         - task: Bash@3
+#           displayName: stageselected
+#           inputs:
+#             targetType: inline
+#             script: |
+#               echo "The stage selected was stage2 as environment: ${{parameters.environment}} was selected"
 
-- ${{ else }}:
-  - stage: stage3
-    jobs:
-    - job: stage3job
-      steps:
-        - task: Bash@3
-          displayName: stageselected
-          inputs:
-            targetType: inline
-            script: |
-              echo "The stage selected was stage3 as environment: ${{parameters.environment}} was selected"
+# - ${{ else }}:
+#   - stage: stage3
+#     jobs:
+#     - job: stage3job
+#       steps:
+#         - task: Bash@3
+#           displayName: stageselected
+#           inputs:
+#             targetType: inline
+#             script: |
+#               echo "The stage selected was stage3 as environment: ${{parameters.environment}} was selected"
