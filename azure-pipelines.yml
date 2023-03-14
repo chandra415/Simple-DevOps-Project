@@ -3,10 +3,19 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger: none
 
+trigger: none
 pool:
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
+
+
+  schedules: 
+  - cron: "0 0 * * *" # daily at midnight
+    displayName: 7PM CST - SAT
+
+  steps:
+  - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
+
 
 # schedules:
 # - cron: "0 1 10-15 * sat"
@@ -20,17 +29,17 @@ pool:
 #     include:
 #     - feature
 
-stages:
+# stages:
 
-- stage: stage1
-  jobs:
-    - job: stage1job
-      steps:
-        - task: PowerShell@1
-          displayName: stageselected
-          inputs:
-            scriptType: 'inlineScript'
-            inlineScript: 'GET https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/$(Build.BuildNumber)?api-version=6.1-preview.7'
+# - stage: stage1
+#   jobs:
+#     - job: stage1job
+#       steps:
+#         - task: PowerShell@1
+#           displayName: stageselected
+#           inputs:
+#             scriptType: 'inlineScript'
+#             inlineScript: 'GET https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/$(Build.BuildNumber)?api-version=6.1-preview.7'
 
         # - task: InvokeRESTAPI@0
         #   inputs:
