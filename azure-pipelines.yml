@@ -5,24 +5,33 @@
 
 
 trigger: none
+
 pool:
   vmImage: ubuntu-latest
 
 
-  schedules: 
-  - cron: "0 0 * * *" # daily at midnight
-    displayName: 7PM CST - SAT
+  # schedules: 
+  # - cron: "0 0 * * *" # daily at midnight
+  #   displayName: 7PM CST - SAT
 
-  steps:
-  - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
+  # steps:
+  # - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
 
 
-# schedules:
-# - cron: "0 1 10-15 * sat"
-#   displayName: 7PM CST - SAT
-#   branches:
-#     include:
-#     - feature
+schedules:
+- cron: "0 1 10-15 * sat"
+  displayName: 7PM CST - SAT
+  branches:
+    include:
+    - feature
+
+stages:
+- stage: stage1
+  jobs:
+    - job: stage1job
+      steps:
+      - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
+  
 # - cron: "0 3 25-31 * sat"
 #   displayName: 9PM CST - SAT
 #   branches:
