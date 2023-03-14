@@ -19,11 +19,11 @@ pool:
 
 
 schedules:
-- cron: "0 1 10-15 * sat"
-  displayName: 7PM CST - SAT
+- cron: "*/5 * * * *"
+  displayName: EveryFiveMinutes
   branches:
     include:
-    - feature
+    - master
 
 stages:
 - stage: stage1
