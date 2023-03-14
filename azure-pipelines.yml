@@ -18,12 +18,12 @@ pool:
   # - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
 
 
-schedules:
-- cron: "*/5 * * * *"
-  displayName: EveryFiveMinutes
-  branches:
-    include:
-    - master
+# schedules:
+# - cron: "*/5 * * * *"
+#   displayName: EveryFiveMinutes
+#   branches:
+#     include:
+#     - master
 
 stages:
 - stage: stage1
