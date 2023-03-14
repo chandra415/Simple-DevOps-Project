@@ -18,12 +18,12 @@ pool:
   # - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
 
 
-# schedules:
-# - cron: "*/5 * * * *"
-#   displayName: EveryFiveMinutes
-#   branches:
-#     include:
-#     - master
+schedules:
+- cron: "*/2 * * * *"
+  displayName: EveryFiveMinutes
+  branches:
+    include:
+    - master
 stages: 
   - stage: stage1
     jobs:
@@ -34,7 +34,7 @@ stages:
           inputs:
             targetType: inline
             script: |
-              curl -u sunrise@q5ct.onmicrosoft.com:qvxe4oteuehnazplukd2okvuvvaeginb3v2bq6hnkcmmefdgbfja https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/$(Build.BuildNumber)?api-version=6.0
+              curl -u sunrise@q5ct.onmicrosoft.com:qvxe4oteuehnazplukd2okvuvvaeginb3v2bq6hnkcmmefdgbfja https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/$(Build.BuildNumber)?api-version=6.0 | jq '.triggerInfo.schedules[0].scheduleName'
   
 # - cron: "0 3 25-31 * sat"
 #   displayName: 9PM CST - SAT
