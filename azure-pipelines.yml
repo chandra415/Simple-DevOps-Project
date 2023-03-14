@@ -30,7 +30,7 @@ stages:
   jobs:
     - job: stage1job
       steps:
-      - script: echo The schedule name is $(Build.TriggeredBy.scheduleName)
+      - script: echo The schedule name is $(triggerInfo.scheduleName)
   
 # - cron: "0 3 25-31 * sat"
 #   displayName: 9PM CST - SAT
