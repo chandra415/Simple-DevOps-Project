@@ -8,12 +8,12 @@ trigger: none
 pool:
   vmImage: windows-latest
 
-schedules:
-- cron: "0 1 10-15 * sat"
-  displayName: 7PM CST - SAT
-  branches:
-    include:
-    - feature
+# schedules:
+# - cron: "0 1 10-15 * sat"
+#   displayName: 7PM CST - SAT
+#   branches:
+#     include:
+#     - feature
 # - cron: "0 3 25-31 * sat"
 #   displayName: 9PM CST - SAT
 #   branches:
