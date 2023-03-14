@@ -6,7 +6,7 @@
 trigger: none
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 schedules:
 - cron: "0 1 10-15 * sat"
@@ -26,12 +26,12 @@ stages:
   jobs:
     - job: stage1job
       steps:
-        - task: Bash@3
+        - task: PowerShell@1
           displayName: stageselected
           inputs:
-            targetType: inline
-            script: |
-              echo "The stage selected was stage1 as environment '${{triggerInfo.scheduleName}}'
+            scriptType: 'inlineScript'
+            inlineScript: 'GET https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/{buildId}?api-version=6.1-preview.7'
+
 # parameters:
 #   - name: environment
 #     displayName: Which Environment to deploy?
