@@ -26,12 +26,17 @@ stages:
   jobs:
     - job: stage1job
       steps:
-        - task: PowerShell@1
-          displayName: stageselected
-          inputs:
-            scriptType: 'inlineScript'
-            inlineScript: 'GET https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/{buildId}?api-version=6.1-preview.7'
+        # - task: PowerShell@1
+        #   displayName: stageselected
+        #   inputs:
+        #     scriptType: 'inlineScript'
+        #     inlineScript: 'GET https://dev.azure.com/sunrise7/FirstPractise/_apis/build/builds/{buildId}?api-version=6.1-preview.7'
 
+        - task: InvokeRESTAPI@0
+          inputs:
+            serviceConnection: 'DevOps'
+            method: 'GET'
+            waitForCompletion: 'false'
 # parameters:
 #   - name: environment
 #     displayName: Which Environment to deploy?
